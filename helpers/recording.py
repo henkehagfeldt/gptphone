@@ -3,7 +3,7 @@ import wave
 import audioop
 
 # Static Parameters
-FORMAT = pyaudio.paInt16  # Audio format
+FORMAT = pyaudio.paInt8  # Audio format
 CHANNELS = 1  # Mono audio
 RATE = 8000  # Sample rate
 CHUNK = 1024  # Frame size
