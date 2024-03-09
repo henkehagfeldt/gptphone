@@ -5,7 +5,7 @@ import audioop
 # Static Parameters
 FORMAT = pyaudio.paInt16  # Audio format
 CHANNELS = 1  # Mono audio
-RATE = 44100  # Sample rate
+RATE = 8000  # Sample rate
 CHUNK = 1024  # Frame size
 SILENCE_THRESHOLD = 1000  # Threshold for detecting silence, adjust based on your mic
 SILENCE_DURATION = 2  # How many seconds of silence before stopping
