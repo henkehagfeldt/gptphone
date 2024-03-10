@@ -1,10 +1,10 @@
 from gtts import gTTS
-import pygame
 from io import BytesIO
+import simpleaudio as sa
 
 # This module is imported so that we can  
 # play the converted audio 
-import os 
+import subprocess
 
 def say(prompt):
 
@@ -12,24 +12,16 @@ def say(prompt):
     
     # convert to file-like object
     fp = BytesIO()
-    tts.write_to_fp(fp)
+    tts.save("response.mp3")
+    #fp.seek(0)
+
+    subprocess.call(["vlc", "response.mp3"])
+
+    play_audio(fp)
+
+def play_audio(fp):
     fp.seek(0)
-
-    os.environ['SDL_AUDIODRIVER'] = 'alsa'
-    
-    pygame.init()
-    pygame.mixer.init()
-
-    # Get the audio configuration
-    pygame.mixer.music.set_volume(1.0)  # Set volume to maximum
-
-    # Initialize the mixer with the specific audio configuration
-    pygame.mixer.init(frequency=44100, size=-16, channels=2)
-
-    # Load and play the audio file
-    pygame.mixer.music.load(fp)
-    pygame.mixer.music.play()
-
-    # Wait for the music to play
-    while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)
+    audio_data = fp.read()
+    wave_obj = sa.WaveObject(audio_data, num_channels=2, bytes_per_sample=2, sample_rate=44100)
+    play_obj = wave_obj.play()
+    play_obj.wait_done()
