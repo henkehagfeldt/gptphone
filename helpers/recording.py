@@ -10,39 +10,6 @@ CHUNK = 1024  # Frame size
 SILENCE_THRESHOLD_BUFFER = 2000 # How much over the silence threshold to register audio
 SILENCE_DURATION = 2  # How many seconds of silence before stopping
 
-def writeNoiseProfile(audio):
-
-    # Start the recording process
-    stream = audio.open(format=FORMAT, channels=CHANNELS,
-                        rate=RATE, input=True,
-                        frames_per_buffer=CHUNK)
-    
-    # Capture noise-only segment
-    frames = []
-    record_seconds = 2
-    for _ in range(0, int(RATE / CHUNK * record_seconds)):
-        data = stream.read(CHUNK)
-        frames.append(data)
-    
-    # Stop and close the stream
-    stream.stop_stream()
-    stream.close()
-
-    # Save the recorded data as a WAV file
-    saveAudio(audio_frames=frames, 
-            audio_sample_size=audio.get_sample_size(FORMAT), 
-            file_name="noise_profile.wav")
-    
-    print("Noise recording saved.")
-
-
-# Find a suitable microphone noise level
-#def calculateNoise(data_chunk):
-#    rms = audioop.rms(data_chunk, 2)  # Get the root mean square of the chunk
-#    print(f"Silence RMS: {rms}")
-#
-#    return rms + SILENCE_THRESHOLD_BUFFER
-
 # Function to detect silence
 def isSilent(data_chunk, silence_threshold):
     """Determine if the given audio chunk is silent."""
@@ -93,7 +60,6 @@ def streamAudio(audio, length):
     print("Reading chunk")
     # Determine background noise
     data = stream.read(CHUNK)
-    #silence_threshold = calculateNoise(data)
 
     while total_duration < length:
         data = stream.read(CHUNK)
@@ -147,8 +113,6 @@ def recordAudio(output_file_name="recording.wav", max_length_seconds=5):
     
     printAudioInfo(audio)
     
-    writeNoiseProfile(audio)
-
     # Configurable Parameters
     RECORD_SECONDS = max_length_seconds  # Maximum duration of recording
     WAVE_OUTPUT_FILENAME = output_file_name  # Output file
