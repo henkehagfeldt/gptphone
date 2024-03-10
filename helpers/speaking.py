@@ -15,8 +15,16 @@ def say(prompt):
     tts.write_to_fp(fp)
     fp.seek(0)
 
-    
     pygame.init()
+
+    # Get the number of available audio devices
+    num_devices = pygame.mixer.get_num_devices()
+
+    print("Available Audio Devices:")
+    for i in range(num_devices):
+        device_info = pygame.mixer.get_device_info(i)
+        print(f"Device {i}: {device_info['name']}")
+
     pygame.mixer.init()
     # Get the audio configuration
     audio_config = pygame.mixer.get_init()
