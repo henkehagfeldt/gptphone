@@ -7,11 +7,24 @@ FORMAT = pyaudio.paUInt8  # Audio format
 CHANNELS = 1  # Mono audio
 RATE = 8000  # Sample rate
 CHUNK = 1024  # Frame size
-SILENCE_THRESHOLD = 10000  # Threshold for detecting silence, adjust based on your mic
+SILENCE_THRESHOLD = 16000  # Threshold for detecting silence, adjust based on your mic
 SILENCE_DURATION = 2  # How many seconds of silence before stopping
 
+# Display verbose audio device information
+def printAudioInfo(audio):
+    default_input_device = audio.get_default_input_device_info()
+    default_output_device = audio.get_default_output_device_info()
+
+    print("Default Input Device:")
+    print(f"  Name: {default_input_device['name']}")
+    print(f"  Index: {default_input_device['index']}")
+
+    print("\nDefault Output Device:")
+    print(f"  Name: {default_output_device['name']}")
+    print(f"  Index: {default_output_device['index']}")
+
 # Function to detect silence
-def is_silent(data_chunk):
+def isSilent(data_chunk):
     """Determine if the given audio chunk is silent."""
     rms = audioop.rms(data_chunk, 2)  # Get the root mean square of the chunk
     return rms < SILENCE_THRESHOLD
@@ -31,7 +44,7 @@ def streamAudio(audio, length):
         data = stream.read(CHUNK)
         frames.append(data)
 
-        currently_silent = is_silent(data)
+        currently_silent = isSilent(data)
 
         # Check for silence to stop recording, unless waiting for first sound
         if currently_silent and not first_chunk:
@@ -68,6 +81,8 @@ def saveAudio(audio_frames, audio_sample_size, file_name):
 def recordAudio(output_file_name="recording.wav", max_length_seconds=5):
 
     audio = pyaudio.PyAudio()
+
+    printAudioInfo(audio)
     
     # Configurable Parameters
     RECORD_SECONDS = max_length_seconds  # Maximum duration of recording
