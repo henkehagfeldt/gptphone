@@ -18,6 +18,16 @@ def say(prompt):
     
     pygame.init()
     pygame.mixer.init()
+    # Get the audio configuration
+    audio_config = pygame.mixer.get_init()
+
+    # Print the audio configuration
+    print("Audio Configuration:")
+    print(f"   Audio Device: {audio_config[1]}")
+    print(f"   Sample Rate: {audio_config[0]} Hz")
+    print(f"   Audio Format: {audio_config[2]}")
+    print(f"   Channels: {audio_config[3]}")
+
     pygame.mixer.music.load(fp)
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():
