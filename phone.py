@@ -13,22 +13,24 @@ def main():
     while True:
         try:
             # Record audio from the user's microphone
-            recorded_audio_file = recordAudio(max_length_seconds=60)
+            recorded_audio_file = recordAudio(max_length_seconds=10)
 
             # Transcribe the audio to text
-            user_input_prompt = transcribe(recorded_audio_file)
-            print(f"User input: {user_input_prompt}")
+            #user_input_prompt = transcribe(recorded_audio_file)
+            #print(f"User input: {user_input_prompt}")
 
             # Clean up the recorded audio file
-            removeFile(recorded_audio_file)
+            #removeFile(recorded_audio_file)
 
-            if (user_input_prompt != None):
+            #if (user_input_prompt != None):
                 # Send the user's question to chatGPT
-                gpt_response = askGpt(user_input_prompt)
-                print(f"ChatGPT Response: {gpt_response}")
+            #    gpt_response = askGpt(user_input_prompt)
+            #    print(f"ChatGPT Response: {gpt_response}")
 
                 # Output the response as audio
-                say(gpt_response)
+            #    say(gpt_response)
+            
+            break
 
         except KeyboardInterrupt as e:
             print("Shutting down")
