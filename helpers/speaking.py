@@ -15,19 +15,14 @@ def say(prompt):
     tts.write_to_fp(fp)
     fp.seek(0)
 
+    os.environ['SDL_AUDIODRIVER'] = 'alsa'
+    
     pygame.init()
-
-    # Get the number of available audio devices
-    num_devices = pygame.mixer.get_num_devices()
-
-    print("Available Audio Devices:")
-    for i in range(num_devices):
-        device_info = pygame.mixer.get_device_info(i)
-        print(f"Device {i}: {device_info['name']}")
-
     pygame.mixer.init()
+
     # Get the audio configuration
     audio_config = pygame.mixer.get_init()
+    pygame.mixer.music.set_volume(1.0)  # Set volume to maximum
 
     # Print the audio configuration
     print("Audio Configuration:")
