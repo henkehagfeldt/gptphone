@@ -21,15 +21,7 @@ def say(prompt):
     pygame.mixer.init()
 
     # Get the audio configuration
-    audio_config = pygame.mixer.get_init()
     pygame.mixer.music.set_volume(1.0)  # Set volume to maximum
-
-    # Print the audio configuration
-    print("Audio Configuration:")
-    print(f"   Audio Device: {audio_config[1]}")
-    print(f"   Sample Rate: {audio_config[0]} Hz")
-    print(f"   Audio Format: {audio_config[2]}")
-    print(f"   Channels: {audio_config[3]}")
 
     # Initialize the mixer with the specific audio configuration
     pygame.mixer.init(frequency=44100, size=-16, channels=2)
