@@ -3,7 +3,7 @@ import wave
 import audioop
 
 # Static Parameters
-FORMAT = pyaudio.paInt8  # Audio format
+FORMAT = pyaudio.paUInt8  # Audio format
 CHANNELS = 1  # Mono audio
 RATE = 8000  # Sample rate
 CHUNK = 1024  # Frame size
@@ -19,7 +19,7 @@ def is_silent(data_chunk):
 def streamAudio(audio, length):
     # Start the recording process
     stream = audio.open(format=FORMAT, channels=CHANNELS,
-                        rate=RATE, input=True, input_device_index=1,
+                        rate=RATE, input=True,
                         frames_per_buffer=CHUNK)
 
     frames = []
