@@ -12,10 +12,23 @@ SILENCE_DURATION = 2  # How many seconds of silence before stopping
 
 # Display verbose audio device information
 def printAudioInfo(audio):
+
+    print("Available input devices:")
+    for i in range(audio.get_device_count()):
+        dev_info = audio.get_device_info_by_index(i)
+        if dev_info["maxInputChannels"] > 0:
+            print(f"  {i}: {dev_info['name']}")
+    
+    print("\nAvailable output devices:")
+    for i in range(audio.get_device_count()):
+        dev_info = audio.get_device_info_by_index(i)
+        if dev_info["maxOutputChannels"] > 0:
+            print(f"  {i}: {dev_info['name']}")
+
     default_input_device = audio.get_default_input_device_info()
     default_output_device = audio.get_default_output_device_info()
 
-    print("Default Input Device:")
+    print("\nDefault Input Device:")
     print(f"  Name: {default_input_device['name']}")
     print(f"  Index: {default_input_device['index']}")
 
@@ -27,6 +40,9 @@ def printAudioInfo(audio):
 def isSilent(data_chunk):
     """Determine if the given audio chunk is silent."""
     rms = audioop.rms(data_chunk, 2)  # Get the root mean square of the chunk
+    
+    print(f"Current RMS: {rms}")
+
     return rms < SILENCE_THRESHOLD
 
 def streamAudio(audio, length):
