@@ -14,4 +14,4 @@ def say(prompt):
     tts.save("response.mp3")
     #fp.seek(0)
 
-    subprocess.call(["vlc", "response.mp3"])
+    subprocess.call(["cvlc", "response.mp3"])
