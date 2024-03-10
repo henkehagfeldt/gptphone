@@ -7,7 +7,7 @@ FORMAT = pyaudio.paUInt8  # Audio format
 CHANNELS = 1  # Mono audio
 RATE = 8000  # Sample rate
 CHUNK = 1024  # Frame size
-SILENCE_THRESHOLD = 1000  # Threshold for detecting silence, adjust based on your mic
+SILENCE_THRESHOLD = 6000  # Threshold for detecting silence, adjust based on your mic
 SILENCE_DURATION = 2  # How many seconds of silence before stopping
 
 # Function to detect silence
