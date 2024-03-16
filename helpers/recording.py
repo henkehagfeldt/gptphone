@@ -83,9 +83,9 @@ def streamAudio(audio, length):
         elif not currently_silent:
             silent_chunks = 0
             first_chunk = False
-            print("Detected Audio!")
-        else:
-            print("Noone speaking")
+            
+            if first_chunk:
+                print("Detected Audio!")
 
         total_duration += CHUNK / RATE
 
