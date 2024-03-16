@@ -20,7 +20,7 @@ def main():
             print(f"User input: {user_input_prompt}")
 
             # Clean up the recorded audio file
-            #removeFile(recorded_audio_file)
+            removeFile(recorded_audio_file)
 
             if (user_input_prompt != None):
                 # Send the user's question to chatGPT
