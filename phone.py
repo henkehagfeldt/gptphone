@@ -21,6 +21,8 @@ def main():
             user_input_prompt = transcribe(recorded_audio_file)
             print(f"User input: {user_input_prompt}")
 
+            say(f"You said{user_input_prompt}")
+
             # Clean up the recorded audio file
             removeFile(recorded_audio_file)
 
@@ -30,9 +32,8 @@ def main():
                 print(f"ChatGPT Response: {gpt_response}")
 
                 # Output the response as audio
+                say("This is the Response")
                 say(gpt_response)
-            
-            break
 
         except KeyboardInterrupt as e:
             print("Shutting down")
