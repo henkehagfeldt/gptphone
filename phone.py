@@ -12,6 +12,8 @@ def removeFile(file_name):
 def main():
     while True:
         try:
+            say("Welcome to phoneGPT")
+
             # Record audio from the user's microphone
             recorded_audio_file = recordAudio(max_length_seconds=10)
 
