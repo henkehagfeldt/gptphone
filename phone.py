@@ -10,18 +10,17 @@ def removeFile(file_name):
         print(f"Removed file {file_name}")
 
 def main():
+    
+    say("Welcome to phoneGPT")
+
     while True:
         try:
-            say("Welcome to phoneGPT")
-
             # Record audio from the user's microphone
             recorded_audio_file = recordAudio(max_length_seconds=10)
 
             # Transcribe the audio to text
             user_input_prompt = transcribe(recorded_audio_file)
             print(f"User input: {user_input_prompt}")
-
-            say(f"You said{user_input_prompt}")
 
             # Clean up the recorded audio file
             removeFile(recorded_audio_file)
@@ -32,7 +31,6 @@ def main():
                 print(f"ChatGPT Response: {gpt_response}")
 
                 # Output the response as audio
-                say("This is the Response")
                 say(gpt_response)
 
         except KeyboardInterrupt as e:
