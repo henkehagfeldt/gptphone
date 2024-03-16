@@ -1,13 +1,9 @@
 from helpers.speaking import say
 from helpers.transcribe import transcribe
 from helpers.recording import recordAudio
+from helpers.utils import removeFile
 from ai.gpt import askGpt
 import os
-
-def removeFile(file_name):
-    if os.path.exists(file_name):
-        os.remove(file_name)
-        print(f"Removed file {file_name}")
 
 def main():
     
