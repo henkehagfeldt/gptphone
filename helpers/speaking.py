@@ -17,4 +17,4 @@ def say(prompt):
     while mixer.music.get_busy():  # wait for music to finish playing
         time.sleep(0.1)
     
-    removeFile(save_file)
+    #removeFile(save_file)
