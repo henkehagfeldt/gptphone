@@ -82,10 +82,10 @@ def streamAudio(audio, length):
                 break
         elif not currently_silent:
             silent_chunks = 0
-            first_chunk = False
             
             if first_chunk:
                 print("Detected Audio!")
+                first_chunk = False
 
         total_duration += CHUNK / RATE
 
